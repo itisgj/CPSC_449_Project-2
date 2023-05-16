@@ -66,15 +66,12 @@ async def search_books_by_author(author: str):
         books.append(Book(**book))
     return books
 
-@app.get("/books/search")
-async def search_books(query: str):
-    pipeline = [
-        {"$search": {"text": {"query": query, "path": ["title", "author"]}}}
-    ]
+@app.get("/books/by-title")
+async def search_books_by_title(title: str):
+
     books = []
-    for book in collection.aggregate(pipeline):
+    for book in collection.find({"title": {"$regex": title, "$options": "i"}}):
         books.append(Book(**book))
-    print(books)
     return books
 
 @app.get("/books/bestsellers")
