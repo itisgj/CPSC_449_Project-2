@@ -1,0 +1,5 @@
+Pymongo
+Uvicorn
+Pydantic
+FastAPI
+MongoDB
